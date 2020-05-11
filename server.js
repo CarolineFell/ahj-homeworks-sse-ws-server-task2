@@ -83,7 +83,7 @@ wsServer.on("connection", (ws, req) => {
   console.log("connected to server");
 
   ws.on("message", message => {
-    console.log("message");
+    console.log("send message");
     [...wsServer.clients]
       .filter(o => {
         return o.readyState === WS.OPEN;
@@ -97,7 +97,7 @@ wsServer.on("connection", (ws, req) => {
       .filter(o => {
         return o.readyState === WS.OPEN;
       })
-      .forEach(o => o.send(JSON.stringify({ type: "delete user" })));
+      .forEach(o => o.send(JSON.stringify({ type: "user logged out" })));
     ws.close();
   });
 
@@ -105,7 +105,7 @@ wsServer.on("connection", (ws, req) => {
     .filter(o => {
       return o.readyState === WS.OPEN;
     })
-    .forEach(o => o.send(JSON.stringify({ type: "add user" })));
+    .forEach(o => o.send(JSON.stringify({ type: "user logged in" })));
 });
 
 app.use(router.routes()).use(router.allowedMethods());
