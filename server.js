@@ -79,7 +79,7 @@ router.delete("/users/:name", async (ctx, next) => {
   ctx.response.status = 204;
 });
 
-wsServer.on("connected", (ws, req) => {
+wsServer.on("connection", (ws, req) => {
   console.log("connected to server");
 
   ws.on("message", message => {
@@ -91,7 +91,7 @@ wsServer.on("connected", (ws, req) => {
       .forEach(o => o.send(message));
   });
 
-  ws.on("closed", message => {
+  ws.on("close", message => {
     console.log("chat closed");
     [...wsServer.clients]
       .filter(o => {
