@@ -92,7 +92,7 @@ wsServer.on("connection", (ws, req) => {
   });
 
   ws.on("close", message => {
-    console.log("chat closed");
+    console.log("closed chat");
     [...wsServer.clients]
       .filter(o => {
         return o.readyState === WS.OPEN;
